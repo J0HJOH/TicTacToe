@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/cream"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_height="wrap_content">
+
+      <LinearLayout
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:gravity="center"
+         android:orientation="vertical">
+
+         <TextView
+             android:id="@+id/playerOneName"
+             android:layout_width="wrap_content"
+             android:layout_height="137dp"
+             android:text="PlayerOne"
+             android:textAlignment="center"
+             android:textSize="20sp"
+             android:textStyle="bold|italic"
+             app:drawableTopCompat="@drawable/x_icon" />
+
+      </LinearLayout>
+
+      <TextView
+          android:id="@+id/oneScore"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+         android:text="0"
+         android:textSize="50sp"
+         android:textStyle="bold"
+         android:textColor="@color/red"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+         android:text=":"
+         android:textSize="50sp"
+         android:textStyle="bold"
+         android:textColor="@color/red"/>
+      <TextView
+          android:id="@+id/twoScore"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+         android:text="0"
+         android:textSize="50sp"
+         android:textStyle="bold"
+         android:textColor="@color/red"/>
+
+
+      <LinearLayout
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:gravity="center"
+         android:orientation="vertical">
+
+         <TextView
+             android:id="@+id/firstPlayer"
+             android:layout_width="wrap_content"
+             android:layout_height="137dp"
+             android:text="PlayerTwo"
+             android:textAlignment="center"
+             android:textSize="20sp"
+             android:textStyle="bold|italic"
+             app:drawableTopCompat="@drawable/o_icon" />
+
+
+
+      </LinearLayout>
+
+   </LinearLayout>
+
+   <GridLayout
+       android:layout_marginTop="20dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:rowCount="3"
+       android:columnCount="3"
+       android:focusable="true">
+
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_1"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:clickable="true"
+          android:layout_margin="5dp"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_2"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_3"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_4"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:clickable="true"
+          android:layout_margin="5dp"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_5"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_6"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_7"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:clickable="true"
+          android:layout_margin="5dp"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_8"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+         android:layout_width="120dp"
+          app:cardCornerRadius="30dp"
+          android:layout_margin="5dp"
+          android:clickable="true"
+          app:cardElevation="30dp"
+          android:padding="50dp"
+         android:layout_height="120dp">
+         <TextView
+             android:id="@+id/btn_9"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="100sp"/>
+
+      </androidx.cardview.widget.CardView>
+   </GridLayout>
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+      android:layout_marginTop="30dp"
+       android:backgroundTint="@color/blue"
+       android:drawableTint="@color/white"
+      android:drawableEnd="@drawable/baseline_refresh_24"
+      android:text="RESET GAME"
+      android:textSize="20sp"/>
+
+
+
+</LinearLayout>
