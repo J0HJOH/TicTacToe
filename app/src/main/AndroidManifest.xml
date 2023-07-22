@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TicTackkyToe"
         tools:targetApi="31">
         <activity
-            android:name=".Winner_message"
+            android:name=".WinnerMsg"
             android:exported="false" />
         <activity
             android:name=".StartPage"

@@ -14,7 +14,7 @@ public class StartPage extends AppCompatActivity {
     EditText playerOne = findViewById(R.id.playerOneName);
     EditText playerTwo = findViewById(R.id.playerTwoName);
 
-    Button startGame = findViewById(R.id.playGame)
+    Button startGame = findViewById(R.id.playGame);
 
     @Override
 

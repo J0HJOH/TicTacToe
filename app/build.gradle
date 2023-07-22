@@ -6,6 +6,10 @@ android {
     namespace 'com.task1.tictactoe'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.task1.tictactoe"
         minSdk 24
