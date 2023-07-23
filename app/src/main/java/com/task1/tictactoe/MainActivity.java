@@ -1,15 +1,21 @@
 package com.task1.tictactoe;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.task1.tictactoe.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,9 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int playerOneTotal, playerTwoTotal;
     private Button resetGame;
 
-    private TextView [] boxText = new TextView[9];
-    private CardView [] buttons = new CardView[9];
-
+    private Button [] buttons = new Button[9];
 
     ActivityMainBinding binding;
 
@@ -40,63 +44,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String getplayerOneName = getIntent().getStringExtra("playerOne");
-        String getplayerTwoName = getIntent().getStringExtra("playerTwo");
+        String getPlayerOneName = getIntent().getStringExtra("playerOne");
+        String getPlayerTwoName = getIntent().getStringExtra("playerTwo");
 
 
         playerOneScore = findViewById(R.id.oneScore);
         playerTwoScore = findViewById(R.id.twoScore);
         resetGame = findViewById(R.id.resetGame);
 
-        binding.firstPlayer.setText(getplayerOneName);
-        binding.secondPlayer.setText(getplayerTwoName);
+        binding.firstPlayer.setText(getPlayerOneName);
+        binding.secondPlayer.setText(getPlayerTwoName);
 
 
 
         for(int i=0; i< buttons.length; i++ ){
             String buttonID = "btn_" + i ;
-            String textID = buttonID+ "_txt";
-            int cardResourceID = getResources().getIdentifier(
+            int btnResourceID = getResources().getIdentifier(
                     buttonID, "id",getPackageName()
             );
-            int textResourceID = getResources().getIdentifier(
-                    textID,"id",getPackageName()
-            );
 
-            buttons[i] = (CardView) findViewById(cardResourceID);
-            boxText[i] = (TextView) findViewById(textResourceID);
+            buttons[i] = (Button) findViewById(btnResourceID);
 
             buttons[i].setOnClickListener(this);
 
-
         }
-        playerOneTotal=0;
-        playerTwoTotal = 0;
         activePlayer = true;
+
+        resetGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetGame();
+            }
+        });
 
     }
 
     @Override
     public void onClick(View v) {
 
-        if(!((TextView)v).getText().toString().equals("")) {
+
+        if(!((Button)v).getText().toString().equals("")) {
+            Toast.makeText(this, "This box is filled", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        //gets that button id
         String buttonID = v.getResources().getResourceEntryName(v.getId());
-        int gamePointer = Integer.parseInt(buttonID.substring(buttonID.length()-5));
+        //gets the last char of the id which indicates the index of the box
+        int gamePointer = Integer.parseInt(buttonID.substring(buttonID.length()-1,
+                buttonID.length()));
 
         if(activePlayer){
             binding.playerOneLayout.setBackgroundResource(R.drawable.black_corners);
-            binding.playerTwoLayout.setBackgroundResource(R.color.cream);
-//            binding.playerTwoLayout.setBackgroundResource(R.drawable.black_corners);
-            ((TextView) v).setText("X");
+            binding.playerTwoLayout.setBackgroundResource(R.drawable.black_box);
+            ((Button) v).setText("X");
+            ((Button)v).setTextColor(getColor(R.color.blue));
+            //sets the value of that index to be 0
             boardPosition[gamePointer] = 0;
+
         }else{
             binding.playerTwoLayout.setBackgroundResource(R.drawable.black_corners);
-            binding.playerOneLayout.setBackgroundResource(R.color.cream);
-//            binding.playerOneLayout.setBackgroundResource(R.drawable.black_corners);
-            ((TextView) v).setText("O");
+            binding.playerOneLayout.setBackgroundResource(R.drawable.black_box);
+            ((Button) v).setText("O");
+            ((Button)v).setTextColor(getColor(R.color.red));
             boardPosition[gamePointer] = 1;
         }
         totalSelecxtedBox++;
@@ -105,15 +115,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(activePlayer){
                 playerOneTotal++;
                 updatePlayerScore();
-
 //                Result Dialog
                 WinnerMsg winnerMessage = new WinnerMsg(MainActivity.this,
                         binding.firstPlayer.getText().toString() +" is the Winner!",
                         MainActivity.this);
                 winnerMessage.setCancelable(true);
                 winnerMessage.show();
+                emptyBoard();
 
-                resetGame();
             }else{
                 playerTwoTotal++;
                 updatePlayerScore();
@@ -123,17 +132,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         MainActivity.this);
                 winnerMessage.setCancelable(true);
                 winnerMessage.show();
-
-                resetGame();
+                emptyBoard();
             }
 
         }else if(totalSelecxtedBox==9){
 
             Toast.makeText(this,
-                    "There is no winner for this round. Try again :)",
+                    "Match Draw. Try again :)",
                     Toast.LENGTH_SHORT).show();
-            resetGame();
-
+            emptyBoard();
         }else{
             activePlayer = !activePlayer;
         }
@@ -144,9 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean winner =false;
 
         for(int [] rightCombo : winningCombinations){
-            if(boardPosition[winningCombinations[0][0]] == boardPosition[winningCombinations[1][1]] &&
-                    boardPosition[winningCombinations[1][1]] == boardPosition[winningCombinations[2][2]] &&
-                    boardPosition[winningCombinations[0][0]] !=3){
+            if(boardPosition[rightCombo[0]] == boardPosition[rightCombo[1]] &&
+                    boardPosition[rightCombo[1]] == boardPosition[rightCombo[2]] &&
+                    boardPosition[rightCombo[0]] !=3){
                 winner = true;
             }
         }
@@ -163,13 +170,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activePlayer = true;
         playerOneTotal = 0;
         playerTwoTotal = 0;
-
-
-        for(int i = 0; i< buttons.length; i++){
-            boardPosition[i] = 3;
-            boxText[i].setText("");
-        }
+        emptyBoard();
         updatePlayerScore();
+    }
+
+    public void emptyBoard() {
+        for(int i = 0; i< boardPosition.length; i++){
+            boardPosition[i] = 3;
+            buttons[i].setText("");
+            totalSelecxtedBox = 0;
+            updatePlayerScore();
+        }
     }
 
 

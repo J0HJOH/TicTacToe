@@ -11,16 +11,20 @@ import android.widget.Toast;
 
 public class StartPage extends AppCompatActivity {
 
-    EditText playerOne = findViewById(R.id.playerOneName);
-    EditText playerTwo = findViewById(R.id.playerTwoName);
+    EditText playerOne ;
+    EditText playerTwo ;
 
-    Button startGame = findViewById(R.id.playGame);
+    Button startGame ;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_page);
+
+        playerOne = findViewById(R.id.playerOneName);
+        playerTwo  = findViewById(R.id.playerTwoName);
+        startGame = findViewById(R.id.playGame);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
