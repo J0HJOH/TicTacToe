@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class WinnerMsg extends Dialog {
+    MediaPlayer victorySound;
 
     private  final String message;
     private final MainActivity mainActivity;
@@ -32,6 +34,11 @@ public class WinnerMsg extends Dialog {
 
         TextView messageText = findViewById(R.id.winner_text);
 
+        Context context = getContext().getApplicationContext();
+        victorySound = MediaPlayer.create(context,R.raw.level_complete_sound);
+
+        victorySound.start();
+
         messageText.setText(message);
         messageText.setWidth(80);
         messageText.setHeight(60);
@@ -40,6 +47,7 @@ public class WinnerMsg extends Dialog {
             @Override
             public void onClick(View v) {
                 mainActivity.emptyBoard();
+                victorySound.stop();
                 dismiss();
             }
         });

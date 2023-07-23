@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView playerOneScore, playerTwoScore;
+
+    MediaPlayer smybolSound;
+//    MediaPlayer gameSong;
 
     private int playerOneTotal, playerTwoTotal;
     private Button resetGame;
@@ -47,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String getPlayerOneName = getIntent().getStringExtra("playerOne");
         String getPlayerTwoName = getIntent().getStringExtra("playerTwo");
 
+        smybolSound = MediaPlayer.create(MainActivity.this,R.raw.bubble_sound);
+//        gameSong = MediaPlayer.create(MainActivity.this,R.raw.game_level_music);
+
 
         playerOneScore = findViewById(R.id.oneScore);
         playerTwoScore = findViewById(R.id.twoScore);
@@ -54,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         binding.firstPlayer.setText(getPlayerOneName);
         binding.secondPlayer.setText(getPlayerTwoName);
+
+//        gameSong.start();
+//        gameSong.release();
 
 
 
@@ -82,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-
         if(!((Button)v).getText().toString().equals("")) {
             Toast.makeText(this, "This box is filled", Toast.LENGTH_SHORT).show();
             return;
@@ -95,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttonID.length()));
 
         if(activePlayer){
+            smybolSound.start();
             binding.playerOneLayout.setBackgroundResource(R.drawable.black_corners);
             binding.playerTwoLayout.setBackgroundResource(R.drawable.black_box);
             ((Button) v).setText("X");
@@ -106,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             binding.playerTwoLayout.setBackgroundResource(R.drawable.black_corners);
             binding.playerOneLayout.setBackgroundResource(R.drawable.black_box);
             ((Button) v).setText("O");
+            smybolSound.start();
             ((Button)v).setTextColor(getColor(R.color.red));
             boardPosition[gamePointer] = 1;
         }
